@@ -2,6 +2,7 @@ package com.coinvs.testsurfaceview;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Myadapter mMyadapter;
     private List<DataInfo> mDataInfos = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +41,39 @@ public class MainActivity extends AppCompatActivity {
         mDataInfos.add(new DataInfo("simple",new MyView(this)));
         mDataInfos.add(new DataInfo("sin",new sinview(this)));
         mDataInfos.add(new DataInfo("touch",new touchdraw(this)));
-
         PieView pieView = new PieView(this);
 
         ArrayList<PieData> data = new ArrayList<>();
         data.add(new PieData("harry",20));
         data.add(new PieData("lily",100));
         pieView.setData(data);
-
         mDataInfos.add(new DataInfo("pie",pieView));
+
+        mDataInfos.add(new DataInfo("show1",null));
+        mDataInfos.add(new DataInfo("show2",null));
+
 
         mMyadapter = new Myadapter(this, mDataInfos, new Myadapter.ShowDelegate() {
             @Override
             public void show(int position) {
                 Log.d(TAG, "show: ");
-                newDialog(mDataInfos.get(position).mView);
+                if(position <= 3) {
+                    newDialog(mDataInfos.get(position).mView);
+                }else{
+                    Intent intent=new Intent();
+                    Context context = MainActivity.this;
+                    switch (position){
+                        case 4:
+                            intent.setClass(context,ShowActivity1.class);
+                            break;
+                        case 5:
+                            intent.setClass(context,showActivity2.class);
+                            break;
+                    }
+                    context.startActivity(intent);
+
+                }
+
             }
         });
         mRecyclerView.setAdapter(mMyadapter);
