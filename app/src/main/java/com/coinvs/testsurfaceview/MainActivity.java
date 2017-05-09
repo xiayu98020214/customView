@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
         pieView.setData(data);
         mDataInfos.add(new DataInfo("pie",pieView));
 
-        mDataInfos.add(new DataInfo("show1",null));
-        mDataInfos.add(new DataInfo("show2",null));
+        mDataInfos.add(new DataInfo("show1",ShowActivity1.class));
+        mDataInfos.add(new DataInfo("show2",showActivity2.class));
+        mDataInfos.add(new DataInfo("show712",show712.class));
 
 
         mMyadapter = new Myadapter(this, mDataInfos, new Myadapter.ShowDelegate() {
@@ -60,17 +61,21 @@ public class MainActivity extends AppCompatActivity {
                 if(position <= 3) {
                     newDialog(mDataInfos.get(position).mView);
                 }else{
-                    Intent intent=new Intent();
-                    Context context = MainActivity.this;
-                    switch (position){
+                 //   Intent intent=new Intent();
+                   // Context context = MainActivity.this;
+                    startActivity(new Intent(MainActivity.this, mDataInfos.get(position).moClass));
+                /*    switch (position){
                         case 4:
                             intent.setClass(context,ShowActivity1.class);
                             break;
                         case 5:
                             intent.setClass(context,showActivity2.class);
                             break;
+                        case 6:
+                            intent.setClass(context,show712.class);
+                            break;
                     }
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
 
                 }
 
