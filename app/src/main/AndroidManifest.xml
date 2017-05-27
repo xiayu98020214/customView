@@ -30,6 +30,9 @@
         <activity android:name=".BezierActivity">
         </activity>
 
+        <activity android:name=".AnimationActivity">
+        </activity>
+
     </application>
 
 </manifest>
