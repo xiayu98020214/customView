@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mDataInfos.add(new DataInfo("show712",show712.class));
         mDataInfos.add(new DataInfo("贝塞尔",BezierActivity.class));
         mDataInfos.add(new DataInfo("动画",AnimationActivity.class));
+        mDataInfos.add(new DataInfo("CoordinateLayout",CoordinateLayoutActivity.class));
 
 
 
