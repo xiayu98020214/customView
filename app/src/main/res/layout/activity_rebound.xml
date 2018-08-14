@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+
+    <com.coinvs.testsurfaceview.ReboundScrollView
+        android:id="@+id/rebound"
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:clickable="true"
+        android:background="@android:color/holo_green_light">
+
+
+
+
+        <TextView
+            android:id="@+id/pull"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="松手领福利"/>
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:shimmer_base_alpha="255"
+            app:shimmer_repeat_count="1">
+
+
+            <TextView
+                android:id="@+id/hello"
+                android:layout_width="50dp"
+                android:layout_height="200px"
+                android:background="@android:color/holo_red_light"
+                android:gravity="center"
+                android:text="红包"
+                android:textColor="@android:color/holo_blue_dark" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <!--<View
+            android:layout_marginTop="230px"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/colorAccent"></View>-->
+    </com.coinvs.testsurfaceview.ReboundScrollView>
+
+</LinearLayout>
