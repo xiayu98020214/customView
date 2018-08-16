@@ -5,12 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <com.coinvs.testsurfaceview.ReboundScrollView
         android:id="@+id/rebound"
@@ -58,10 +56,17 @@
     </com.coinvs.testsurfaceview.ReboundScrollView>
 
 
-        <com.coinvs.testsurfaceview.BreatheView
-            android:id="@+id/brv"
-            app:duration="2000"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+
+
+
+    <com.coinvs.testsurfaceview.PullView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:clickable="true"
+
+        android:background="@drawable/home_page_background">
+
+
+
+    </com.coinvs.testsurfaceview.PullView>
 </LinearLayout>

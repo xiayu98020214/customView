@@ -50,7 +50,7 @@ public class ReboundActivity extends AppCompatActivity {
 
             }
         });
-        alpha.start();//启动动画。
+        //alpha.start();//启动动画。
 
 
         ReboundScrollView reboundScrollView = (ReboundScrollView)findViewById(R.id.rebound);
@@ -58,7 +58,7 @@ public class ReboundActivity extends AppCompatActivity {
         reboundScrollView.setOnReboundEndListener(new ReboundScrollView.OnReboundEndListener() {
             @Override
             public void onDown() {
-                alpha.cancel();
+             //   alpha.cancel();
             }
 
             @Override
@@ -71,7 +71,7 @@ public class ReboundActivity extends AppCompatActivity {
             @Override
             public void onRelease() {
                 pull.setVisibility(View.INVISIBLE);
-                alpha.start();
+            //    alpha.start();
             }
 
             @Override
@@ -85,13 +85,13 @@ public class ReboundActivity extends AppCompatActivity {
             }
         });
 
-        BreatheView brv = (BreatheView) findViewById(R.id.brv);
+/*        BreatheView brv = (BreatheView) findViewById(R.id.brv);
         brv.setInterval(2000) //设置闪烁间隔时间
                 .setCoreRadius(5f)//设置中心圆半径
                 .setDiffusMaxWidth(300f)//设置闪烁圆的最大半径
                 .setDiffusColor(Color.parseColor("#0cf465"))//设置闪烁圆的颜色
                 .setCoreColor(Color.parseColor("#f40c3a"))//设置中心圆的颜色
-                .onStart();
+                .onStart();*/
     }
 
 }
