@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -29,7 +30,9 @@ public class PullView extends RelativeLayout {
     private boolean mEnableBottomRebound = true;
     private OnReboundEndListener mOnReboundEndListener;
     private View mContentView;
+    private View digView;
     private Rect mRect = new Rect();
+    private Rect mRect_dig = new Rect();
 
     public PullView(Context context) {
         super(context);
@@ -51,6 +54,7 @@ public class PullView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mContentView = this;
+        digView = getChildAt(0);
      //   bottom = mContentView.getBottom();
 
     }
@@ -94,6 +98,7 @@ public class PullView extends RelativeLayout {
                 if(first) {
                     first = false;
                     mRect.set(mContentView.getLeft(), mContentView.getTop(), mContentView.getRight(), mContentView.getBottom());
+                    mRect_dig.set(digView.getLeft(), digView.getTop(), digView.getRight(), digView.getBottom());
                 }
                 if (mOnReboundEndListener != null) mOnReboundEndListener.onDown();
                 break;
@@ -124,7 +129,8 @@ public class PullView extends RelativeLayout {
              //   int offset = (int) (deltaY * 0.48);
                 int offset = (int) (deltaY * 0.48);
                 mContentView.layout(mRect.left, mRect.top , mRect.right, mRect.bottom + offset);
-                Log.e(TAG,"move :   mRect.bottom:"+ mRect.bottom+"   offset :"+offset);
+                digView.layout(mRect_dig.left, mRect_dig.top + offset, mRect_dig.right, mRect_dig.bottom + offset);
+
 
                 rebound = true;
                 break;
@@ -133,16 +139,23 @@ public class PullView extends RelativeLayout {
                 if (!rebound) break;
                 if (mOnReboundEndListener != null) mOnReboundEndListener.onRelease();
                 reboundDirection = mContentView.getTop() - mRect.top;
-
-                ValueAnimator animator = ValueAnimator.ofInt(mContentView.getBottom(),mRect.bottom);
+                final int distance = mContentView.getBottom() - mRect.bottom;
+                ValueAnimator animator = ValueAnimator.ofFloat(1,0);
+                animator.setInterpolator(new OvershootInterpolator());
                 animator.setDuration(1000).start();
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        Integer  value = (Integer )animation.getAnimatedValue();
+                        Float  value = (Float )animation.getAnimatedValue();
                         Log.e(TAG,"value :"+value);
+                        int dis = (int)(distance*value);
+                        mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom+dis);
+                        digView.layout(mRect_dig.left, mRect_dig.top + dis, mRect_dig.right, mRect_dig.bottom + dis);
 
-                        mContentView.layout(mRect.left, mRect.top, mRect.right, value);
+                     /*   LayoutParams lp=(LayoutParams)mContentView.getLayoutParams();
+                        lp.height= value - mRect.top;
+                        mContentView.setLayoutParams(lp);*/
+                      //  digView.invalidate();
 
                     }
                 });

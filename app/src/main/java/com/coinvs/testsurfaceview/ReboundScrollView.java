@@ -156,7 +156,6 @@ public class ReboundScrollView extends FrameLayout {
                 mContentView.startAnimation(animation);
                 mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom);
                 Log.e(TAG,"layout :   mContentView.getTop(): "+mContentView.getTop()+"   mRect.top: "+mRect.top);
-
                 rebound = false;
                 break;
         }
