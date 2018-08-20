@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
@@ -149,12 +150,12 @@ public class PullView extends RelativeLayout {
                         Float  value = (Float )animation.getAnimatedValue();
                         Log.e(TAG,"value :"+value);
                         int dis = (int)(distance*value);
-                        mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom+dis);
-                        digView.layout(mRect_dig.left, mRect_dig.top + dis, mRect_dig.right, mRect_dig.bottom + dis);
+                       /* mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom+dis);
+                        digView.layout(mRect_dig.left, mRect_dig.top + dis, mRect_dig.right, mRect_dig.bottom + dis);*/
 
-                     /*   LayoutParams lp=(LayoutParams)mContentView.getLayoutParams();
-                        lp.height= value - mRect.top;
-                        mContentView.setLayoutParams(lp);*/
+                        LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mContentView.getLayoutParams();
+                        lp.height= (mRect.bottom - mRect.top) +dis;
+                        mContentView.setLayoutParams(lp);
                       //  digView.invalidate();
 
                     }
