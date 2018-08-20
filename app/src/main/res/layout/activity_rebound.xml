@@ -63,15 +63,43 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:clickable="true"
-
         android:background="@drawable/home_page_background">
 
+
+
+            <!--中心imageView-->
+
+            <!--中间的imageView-->
+            <ImageView
+                android:id="@+id/iv_wave_1"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_circle" />
+            <!--最外层imageView-->
+            <ImageView
+                android:id="@+id/iv_wave_2"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_circle" />
+
         <ImageView
+            android:id="@+id/iv_wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/dig_icon" />
+
+   <!--     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/dig_icon"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"/>-->
 
 
     </com.coinvs.testsurfaceview.PullView>

@@ -6,7 +6,12 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.OvershootInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -92,6 +97,47 @@ public class ReboundActivity extends AppCompatActivity {
                 .setDiffusColor(Color.parseColor("#0cf465"))//设置闪烁圆的颜色
                 .setCoreColor(Color.parseColor("#f40c3a"))//设置中心圆的颜色
                 .onStart();*/
+        setAnim1();
+        setAnim2();
     }
 
+
+
+    private void setAnim1() {
+        AnimationSet as = new AnimationSet(true);
+        //缩放动画，以中心从原始放大到1.4倍
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.4f, 1.0f, 1.4f,
+                ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
+                ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+        //渐变动画
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.5f);
+        scaleAnimation.setDuration(800);
+        scaleAnimation.setRepeatCount(Animation.INFINITE);
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        as.setDuration(800);
+        as.addAnimation(scaleAnimation);
+        as.addAnimation(alphaAnimation);
+        ImageView iv1 = findViewById(R.id.iv_wave_1);
+        iv1.startAnimation(as);
+    }
+
+
+    private void setAnim2() {
+        AnimationSet as = new AnimationSet(true);
+        //缩放动画，以中心从1.4倍放大到1.8倍
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1.4f, 1.8f, 1.4f, 1.8f,
+                ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
+                ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+        //渐变动画
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 0.1f);
+        scaleAnimation.setDuration(800);
+        scaleAnimation.setRepeatCount(Animation.INFINITE);
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        as.setDuration(800);
+        as.addAnimation(scaleAnimation);
+        as.addAnimation(alphaAnimation);
+        ImageView iv2 = findViewById(R.id.iv_wave_2);
+
+        iv2.startAnimation(as);
+    }
 }

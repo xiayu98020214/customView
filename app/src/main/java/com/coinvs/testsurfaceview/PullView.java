@@ -11,9 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -87,6 +85,7 @@ public class PullView extends RelativeLayout {
     private int lastY;
     private boolean rebound = false;
     private int reboundDirection = 0; //<0 表示下部回弹 >0 表示上部回弹 0表示不回弹
+    private boolean pulling = false;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -105,12 +104,14 @@ public class PullView extends RelativeLayout {
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if (!isScrollToTop() && !isScrollToBottom()) {
+                if(pulling) break;
+    /*            if (!isScrollToTop() && !isScrollToBottom()) {
                     lastY = (int) ev.getY();
                     break;
-                }
+                }*/
                 //处于顶部或者底部
                 int deltaY = (int) (ev.getY() - lastY);
+                if(deltaY < 0 ) break;
                 //deltaY > 0 下拉 deltaY < 0 上拉
                 if (deltaY > 80) {
                     if (mOnReboundEndListener != null) mOnReboundEndListener.onPull();
@@ -129,15 +130,18 @@ public class PullView extends RelativeLayout {
 
              //   int offset = (int) (deltaY * 0.48);
                 int offset = (int) (deltaY * 0.48);
-                mContentView.layout(mRect.left, mRect.top , mRect.right, mRect.bottom + offset);
-                digView.layout(mRect_dig.left, mRect_dig.top + offset, mRect_dig.right, mRect_dig.bottom + offset);
-
+         //       mContentView.layout(mRect.left, mRect.top , mRect.right, mRect.bottom + offset);
+             //   digView.layout(mRect_dig.left, mRect_dig.top + offset, mRect_dig.right, mRect_dig.bottom + offset);
+                LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mContentView.getLayoutParams();
+                lp.height= (mRect.bottom - mRect.top) +offset;
+                mContentView.setLayoutParams(lp);
 
                 rebound = true;
                 break;
 
             case MotionEvent.ACTION_UP:
                 if (!rebound) break;
+                pulling = true;
                 if (mOnReboundEndListener != null) mOnReboundEndListener.onRelease();
                 reboundDirection = mContentView.getTop() - mRect.top;
                 final int distance = mContentView.getBottom() - mRect.bottom;
@@ -147,16 +151,16 @@ public class PullView extends RelativeLayout {
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        Float  value = (Float )animation.getAnimatedValue();
+                        Float value = (Float)animation.getAnimatedValue();
                         Log.e(TAG,"value :"+value);
                         int dis = (int)(distance*value);
-                       /* mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom+dis);
+ /*                       mContentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom+dis);
                         digView.layout(mRect_dig.left, mRect_dig.top + dis, mRect_dig.right, mRect_dig.bottom + dis);*/
 
                         LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mContentView.getLayoutParams();
                         lp.height= (mRect.bottom - mRect.top) +dis;
                         mContentView.setLayoutParams(lp);
-                      //  digView.invalidate();
+                        if(dis == 0 ) pulling = false;
 
                     }
                 });
