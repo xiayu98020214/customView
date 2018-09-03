@@ -16,13 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShowActivity1"></activity>
-        <activity android:name=".showActivity2"></activity>
-        <activity android:name=".show712"></activity>
-        <activity android:name=".BezierActivity"></activity>
-        <activity android:name=".AnimationActivity"></activity>
-        <activity android:name=".CoordinateLayoutActivity"></activity>
-        <activity android:name=".ReboundActivity"></activity>
+        <activity android:name=".ShowActivity1" />
+        <activity android:name=".showActivity2" />
+        <activity android:name=".show712" />
+        <activity android:name=".BezierActivity" />
+        <activity android:name=".AnimationActivity" />
+        <activity android:name=".CoordinateLayoutActivity" />
+        <activity android:name=".ReboundActivity" />
+        <activity android:name=".Book1_1Activity"></activity>
     </application>
 
 </manifest>

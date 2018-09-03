@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mDataInfos.add(new DataInfo("动画",AnimationActivity.class));
         mDataInfos.add(new DataInfo("CoordinateLayout",CoordinateLayoutActivity.class));
         mDataInfos.add(new DataInfo("回弹",ReboundActivity.class));
+        mDataInfos.add(new DataInfo("书1_1",Book1_1Activity.class));
 
 
 
